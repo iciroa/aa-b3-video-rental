@@ -3,6 +3,9 @@ package VRUI;
 import java.util.Date;
 
 public class Rental {
+    public static final int FOR_RENTED = 0;
+    public static final int FOR_RETURNED = 1;
+
     private Video video;
     private int status; // 0 for Rented, 1 for Returned
     private Date rentDate;
@@ -10,7 +13,7 @@ public class Rental {
 
     public Rental(Video video) {
         this.video = video;
-        status = 0;
+        status = FOR_RENTED;
         rentDate = new Date();
     }
 
@@ -27,8 +30,8 @@ public class Rental {
     }
 
     public void returnVideo() {
-        if (status == 1) {
-            this.status = 1;
+        if (status == FOR_RETURNED) {
+            this.status = FOR_RETURNED;
             returnDate = new Date();
         }
     }
@@ -71,7 +74,7 @@ public class Rental {
     public int getDaysRented() {
         int daysRented;
         long diff = 0;
-        if (getStatus() == 1) { // returned Video
+        if (getStatus() == FOR_RETURNED) { // returned Video
             diff = returnDate.getTime() - rentDate.getTime();
         } else { // not yet returned
             diff = new Date().getTime() - rentDate.getTime();
