@@ -1,5 +1,4 @@
 package VRUI;
-
 public enum VideoPriceCode {
     REGULAR {
         double getRentCharge (int daysRented) {
