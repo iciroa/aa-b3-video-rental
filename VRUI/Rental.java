@@ -94,7 +94,8 @@ public class Rental {
             case Video.NEW_RELEASE:
                 charge = daysRented * 3.0;
                 break;
-
+            default:
+                break;
         }
         return charge;
     }
