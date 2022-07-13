@@ -44,12 +44,20 @@ public class Rental {
         this.rentDate = rentDate;
     }
 
+    public long getTimeOfGetRentDate() {
+        return rentDate.getTime();
+    }
+
     public Date getReturnDate() {
         return returnDate;
     }
 
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public long getTimeOfReturnDate() {
+        return returnDate.getTime();
     }
 
     public int getDaysRentedLimit() {
@@ -64,13 +72,14 @@ public class Rental {
         int daysRented;
         long diff = 0;
         if (getStatus() == FOR_RETURNED) { // returned Video
-            diff = returnDate.getTime() - rentDate.getTime();
+            diff = getTimeOfReturnDate() - getTimeOfGetRentDate();
         } else { // not yet returned
-            diff = new Date().getTime() - rentDate.getTime();
+            diff = new Date().getTime() - getTimeOfGetRentDate();
         }
         daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
         return daysRented;
     }
+
     public double getVideoCharge() {
         Video video = getVideo();
         int daysRented = getDaysRented();
@@ -89,6 +98,7 @@ public class Rental {
         }
         return charge;
     }
+
     public int getVideoPoint() {
         Video video = getVideo();
         int daysRented = getDaysRented();
