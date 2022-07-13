@@ -7,16 +7,13 @@ import java.util.Scanner;
 
 public class DataControl {
 
-    private Scanner scanner;
+    private final List<Customer> customers = new ArrayList<Customer>();
+    private final List<Video> videos = new ArrayList<Video>();
+    private final Scanner scanner;
 
-    DataControl(Scanner scanner)
-    {
+    DataControl(Scanner scanner) {
         this.scanner = scanner;
     }
-
-    private final List<Customer> customers = new ArrayList<Customer>();
-
-    private final List<Video> videos = new ArrayList<Video>();
 
     public void clearRentals() {
         Customer foundCustomer = findCustomer();
@@ -73,8 +70,8 @@ public class DataControl {
         customers.add(james);
         customers.add(brown);
 
-        Video v1 = new Video("v1", Video.CD, Video.REGULAR, new Date());
-        Video v2 = new Video("v2", Video.DVD, Video.NEW_RELEASE, new Date());
+        Video v1 = new Video("v1", VideoType.CD, Video.REGULAR, new Date());
+        Video v2 = new Video("v2", VideoType.DVD, Video.NEW_RELEASE, new Date());
         videos.add(v1);
         videos.add(v2);
 
@@ -165,8 +162,21 @@ public class DataControl {
         int priceCode = scanner.nextInt();
 
         Date registeredDate = new Date();
-        Video video = new Video(title, videoType, priceCode, registeredDate);
+        Video video = new Video(title, videoTypeFactory(videoType), priceCode, registeredDate);
         videos.add(video);
+    }
+
+    public VideoType videoTypeFactory(int code) {
+        switch (code) {
+            case 1:
+                return VideoType.VHS;
+            case 2:
+                return VideoType.CD;
+            case 3:
+                return VideoType.DVD;
+            default:
+                return null;
+        }
     }
 
 }
