@@ -2,12 +2,12 @@ package VRUI;
 
 import java.util.Date;
 
-public class Rental {
-    public static final int FOR_RENTED = 0;
-    public static final int FOR_RETURNED = 1;
+import static VRUI.RentStatus.FOR_RENTED;
+import static VRUI.RentStatus.FOR_RETURNED;
 
+public class Rental {
     private Video video;
-    private int status; // 0 for Rented, 1 for Returned
+    private RentStatus status;
     private Date rentDate;
     private Date returnDate;
 
@@ -25,7 +25,7 @@ public class Rental {
         this.video = video;
     }
 
-    public int getStatus() {
+    public RentStatus getStatus() {
         return status;
     }
 
