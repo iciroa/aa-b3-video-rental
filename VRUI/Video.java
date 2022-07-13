@@ -76,4 +76,5 @@ public class Video {
     public void setVideoType(int videoType) {
         this.videoType = videoType;
     }
+
 }
