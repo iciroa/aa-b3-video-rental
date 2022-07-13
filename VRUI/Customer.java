@@ -6,6 +6,7 @@ import java.util.List;
 
 // test jaeyoung
 public class Customer {
+    static final String CONGRAT_MESSAGE = "Congrat! you earned one free coupon";
     private String name;
 
     private List<Rental> rentals = new ArrayList<Rental>();
@@ -48,30 +49,13 @@ public class Customer {
             int eachPoint = 0;
             int daysRented = each.getDaysRented();
 
-            switch (each.getVideo().getPriceCode()) {
-                case Video.REGULAR:
-                    eachCharge += 2;
-                    if (daysRented > 2)
-                        eachCharge += (daysRented - 2) * 1.5;
-                    break;
-                case Video.NEW_RELEASE:
-                    eachCharge = daysRented * 3;
-                    break;
-            }
-
-            eachPoint++;
-
-            if ((each.getVideo().getPriceCode() == Video.NEW_RELEASE))
-                eachPoint++;
-
-            if (daysRented > each.getDaysRentedLimit())
-                eachPoint -= Math.min(eachPoint, each.getVideo().getLateReturnPointPenalty());
+            eachCharge = each.getVideoCharge();
+            eachPoint = each.getVideoPoint();
 
             result += "\t" + each.getVideo().getTitle() + "\tDays rented: " + daysRented + "\tCharge: " + eachCharge
                     + "\tPoint: " + eachPoint + "\n";
 
             totalCharge += eachCharge;
-
             totalPoint += eachPoint;
         }
 
@@ -79,10 +63,10 @@ public class Customer {
 
 
         if (totalPoint >= 10) {
-            System.out.println("Congrat! You earned one free coupon");
+            System.out.println(CONGRAT_MESSAGE);
         }
         if (totalPoint >= 30) {
-            System.out.println("Congrat! You earned two free coupon");
+            System.out.println(CONGRAT_MESSAGE);
         }
         return result;
     }
