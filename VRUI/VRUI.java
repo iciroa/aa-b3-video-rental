@@ -1,14 +1,16 @@
+package VRUI;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class VRUI {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-    private List<Customer> customers = new ArrayList<Customer>();
+    private final List<Customer> customers = new ArrayList<Customer>();
 
-    private List<Video> videos = new ArrayList<Video>();
+    private final List<Video> videos = new ArrayList<Video>();
 
     public static void main(String[] args) {
         VRUI ui = new VRUI();

@@ -1,3 +1,5 @@
+package VRUI;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +35,7 @@ public class Customer {
     }
 
     public String getReport() {
-        String result = "Customer Report for " + getName() + "\n";
+        String result = "VRUI.Customer Report for " + getName() + "\n";
 
         List<Rental> rentals = getRentals();
 
