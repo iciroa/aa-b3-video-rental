@@ -10,14 +10,18 @@ public class Video {
 
 
     private String title;
-    private int priceCode;
+    private VideoPriceCode priceCode;
     private Date registeredDate;
     private boolean rented;
 
     public Video(String title, VideoType videoType, int priceCode, Date registeredDate) {
         this.setTitle(title);
         this.setVideoType(videoType);
-        this.setPriceCode(priceCode);
+        if(priceCode == REGULAR)
+            this.setPriceCode(VideoPriceCode.REGULAR);
+        if(NEW_RELEASE == priceCode) {
+            this.setPriceCode(VideoPriceCode.NEW_RELEASE);
+        }
         this.registeredDate = registeredDate;
     }
 
@@ -25,11 +29,11 @@ public class Video {
         return videoType.getPentalty();
     }
 
-    public int getPriceCode() {
+    public VideoPriceCode getPriceCode() {
         return priceCode;
     }
 
-    public void setPriceCode(int priceCode) {
+    public void setPriceCode(VideoPriceCode priceCode) {
         this.priceCode = priceCode;
     }
 
