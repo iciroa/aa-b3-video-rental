@@ -57,8 +57,7 @@ public class VRUI {
     }
 
     public void clearRentals() {
-        System.out.println("Enter customer name: ");
-        String customerName = scanner.next();
+        String customerName = getName();
 
         Customer foundCustomer = null;
         for (Customer customer : customers) {
@@ -83,9 +82,13 @@ public class VRUI {
         }
     }
 
-    public void returnVideo() {
+    private String getName() {
         System.out.println("Enter customer name: ");
-        String customerName = scanner.next();
+        return scanner.next();
+    }
+
+    public void returnVideo() {
+        String customerName = getName();
 
         Customer foundCustomer = null;
         for (Customer customer : customers) {
@@ -150,8 +153,7 @@ public class VRUI {
     }
 
     public void getCustomerReport() {
-        System.out.println("Enter customer name: ");
-        String customerName = scanner.next();
+        String customerName = getName();
 
         Customer foundCustomer = null;
         for (Customer customer : customers) {
@@ -170,8 +172,7 @@ public class VRUI {
     }
 
     public void rentVideo() {
-        System.out.println("Enter customer name: ");
-        String customerName = scanner.next();
+        String customerName = getName();
 
         Customer foundCustomer = null;
         for (Customer customer : customers) {
@@ -206,8 +207,7 @@ public class VRUI {
 
     public void register(String object) {
         if (object.equals("customer")) {
-            System.out.println("Enter customer name: ");
-            String name = scanner.next();
+            String name = getName();
             Customer customer = new Customer(name);
             customers.add(customer);
         } else {
