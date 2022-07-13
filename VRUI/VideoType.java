@@ -7,7 +7,7 @@ public enum VideoType {
         }
 
         int getLimit() {
-            return 1;
+            return 5;
         }
 
     },
@@ -17,7 +17,7 @@ public enum VideoType {
         }
 
         int getLimit() {
-            return 1;
+            return 3;
         }
 
     },
@@ -27,7 +27,7 @@ public enum VideoType {
         }
 
         int getLimit() {
-            return 1;
+            return 2;
         }
 
     };

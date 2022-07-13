@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-// test jaeyoung
 public class Customer {
     static final String CONGRAT_MESSAGE = "Congrat! you earned one free coupon";
     private String name;

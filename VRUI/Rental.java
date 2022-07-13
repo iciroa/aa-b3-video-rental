@@ -2,12 +2,12 @@ package VRUI;
 
 import java.util.Date;
 
-public class Rental {
-    public static final int FOR_RENTED = 0;
-    public static final int FOR_RETURNED = 1;
+import static VRUI.RentStatus.FOR_RENTED;
+import static VRUI.RentStatus.FOR_RETURNED;
 
+public class Rental {
     private Video video;
-    private int status; // 0 for Rented, 1 for Returned
+    private RentStatus status;
     private Date rentDate;
     private Date returnDate;
 
@@ -25,7 +25,7 @@ public class Rental {
         this.video = video;
     }
 
-    public int getStatus() {
+    public RentStatus getStatus() {
         return status;
     }
 
@@ -44,12 +44,20 @@ public class Rental {
         this.rentDate = rentDate;
     }
 
+    public long getTimeOfGetRentDate() {
+        return rentDate.getTime();
+    }
+
     public Date getReturnDate() {
         return returnDate;
     }
 
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public long getTimeOfReturnDate() {
+        return returnDate.getTime();
     }
 
     public int getDaysRentedLimit() {
@@ -64,13 +72,14 @@ public class Rental {
         int daysRented;
         long diff = 0;
         if (getStatus() == FOR_RETURNED) { // returned Video
-            diff = returnDate.getTime() - rentDate.getTime();
+            diff = getTimeOfReturnDate() - getTimeOfGetRentDate();
         } else { // not yet returned
-            diff = new Date().getTime() - rentDate.getTime();
+            diff = new Date().getTime() - getTimeOfGetRentDate();
         }
         daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
         return daysRented;
     }
+
     public double getVideoCharge() {
         Video video = getVideo();
         int daysRented = getDaysRented();
