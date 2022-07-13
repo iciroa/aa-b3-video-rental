@@ -29,10 +29,10 @@ public class VRUI {
                     ui.listVideos();
                     break;
                 case 3:
-                    ui.register("customer");
+                    ui.registerCustomer();
                     break;
                 case 4:
-                    ui.register("video");
+                    ui.registerVideo();
                     break;
                 case 5:
                     ui.rentVideo();
@@ -57,15 +57,7 @@ public class VRUI {
     }
 
     public void clearRentals() {
-        String customerName = getName();
-
-        Customer foundCustomer = null;
-        for (Customer customer : customers) {
-            if (customer.getName().equals(customerName)) {
-                foundCustomer = customer;
-                break;
-            }
-        }
+        Customer foundCustomer = findCustomer();
 
         if (foundCustomer == null) {
             System.out.println("No customer found");
@@ -82,13 +74,9 @@ public class VRUI {
         }
     }
 
-    private String getName() {
+    private Customer findCustomer() {
         System.out.println("Enter customer name: ");
-        return scanner.next();
-    }
-
-    public void returnVideo() {
-        String customerName = getName();
+        String customerName = scanner.next();
 
         Customer foundCustomer = null;
         for (Customer customer : customers) {
@@ -97,6 +85,11 @@ public class VRUI {
                 break;
             }
         }
+        return foundCustomer;
+    }
+
+    public void returnVideo() {
+        Customer foundCustomer = findCustomer();
         if (foundCustomer == null) return;
 
         System.out.println("Enter video title to return: ");
@@ -153,15 +146,7 @@ public class VRUI {
     }
 
     public void getCustomerReport() {
-        String customerName = getName();
-
-        Customer foundCustomer = null;
-        for (Customer customer : customers) {
-            if (customer.getName().equals(customerName)) {
-                foundCustomer = customer;
-                break;
-            }
-        }
+        Customer foundCustomer = findCustomer();
 
         if (foundCustomer == null) {
             System.out.println("No customer found");
@@ -172,15 +157,7 @@ public class VRUI {
     }
 
     public void rentVideo() {
-        String customerName = getName();
-
-        Customer foundCustomer = null;
-        for (Customer customer : customers) {
-            if (customer.getName().equals(customerName)) {
-                foundCustomer = customer;
-                break;
-            }
-        }
+        Customer foundCustomer = findCustomer();
 
         if (foundCustomer == null) return;
 
@@ -205,25 +182,29 @@ public class VRUI {
         foundCustomer.setRentals(customerRentals);
     }
 
-    public void register(String object) {
-        if (object.equals("customer")) {
-            String name = getName();
-            Customer customer = new Customer(name);
-            customers.add(customer);
-        } else {
-            System.out.println("Enter video title to register: ");
-            String title = scanner.next();
+    public void registerCustomer() {
 
-            System.out.println("Enter video type( 1 for VHD, 2 for CD, 3 for DVD ):");
-            int videoType = scanner.nextInt();
+        System.out.println("Enter customer name: ");
+        String name = scanner.next();
+        Customer customer = new Customer(name);
+        customers.add(customer);
 
-            System.out.println("Enter price code( 1 for Regular, 2 for New Release ):");
-            int priceCode = scanner.nextInt();
+    }
 
-            Date registeredDate = new Date();
-            Video video = new Video(title, videoType, priceCode, registeredDate);
-            videos.add(video);
-        }
+    public void registerVideo() {
+
+        System.out.println("Enter video title to register: ");
+        String title = scanner.next();
+
+        System.out.println("Enter video type( 1 for VHD, 2 for CD, 3 for DVD ):");
+        int videoType = scanner.nextInt();
+
+        System.out.println("Enter price code( 1 for Regular, 2 for New Release ):");
+        int priceCode = scanner.nextInt();
+
+        Date registeredDate = new Date();
+        Video video = new Video(title, videoType, priceCode, registeredDate);
+        videos.add(video);
     }
 
     public int showCommand() {
